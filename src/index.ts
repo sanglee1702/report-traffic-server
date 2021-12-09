@@ -14,6 +14,7 @@ import FileControllers from "./controllers/file.controllers";
 import FilesRouter from "./routes/file.routes";
 import CommonRouter from "./routes/common.routes";
 import NotificationsRouter from "./routes/notifications.routes";
+import UserRouter from "./routes/user.routes";
 import admin, { initializeApp } from "firebase-admin";
 
 const serviceAccount = require("../config/gofun-333404-firebase-adminsdk-jsff7-0b4e6780c7.json");
@@ -29,7 +30,13 @@ moment.updateLocale("en", {
 const init = () => {
   const server = express();
 
-  const routes = [AuthRouter, FilesRouter, CommonRouter, NotificationsRouter];
+  const routes = [
+    AuthRouter,
+    FilesRouter,
+    CommonRouter,
+    NotificationsRouter,
+    UserRouter,
+  ];
 
   server.use(cors());
   // Parse request of content-type - application/json

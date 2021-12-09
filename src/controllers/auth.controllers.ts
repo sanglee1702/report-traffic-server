@@ -1,30 +1,30 @@
-import { Request, Response } from 'express';
-import UserService from '../services/user.service';
-import OTPService from '../services/otp.service';
+import { Request, Response } from "express";
+import UserService from "../services/user.service";
+import OTPService from "../services/otp.service";
 import {
   PermissionError,
   ReporingError,
   UnauthorizedError,
-} from '../utils/error';
-import sendEmail from '../utils/send-email';
-import { OTPType } from '../models/otp.models';
+} from "../utils/error";
+import sendEmail from "../utils/send-email";
+import { OTPType } from "../models/otp.models";
 import {
   generateCode,
   generateOTP,
   hasEmail,
   hasPhoneNumber,
-} from '../helpers';
-import { ObjectStatus, Roles } from '../models/common/models.enum';
-import AccountService, { IUserSearchParams } from '../services/account.service';
-import { checkAuthentication } from '../helpers/authentication.helpers';
-import { ICreateUserModels, IUserModels } from '../models/users.models';
-import { ICreateAccountModels } from '../models/accounts.models';
-import { BCryptHasher } from '../utils/hasher';
-import { JWTAuthenticator } from '../authentication';
-import logger from '../logs/logger';
-import moment from 'moment';
-import exportExcel from '../utils/exportExcel';
-import { envConfig } from '../config/env.config';
+} from "../helpers";
+import { ObjectStatus, Roles } from "../models/common/models.enum";
+import AccountService, { IUserSearchParams } from "../services/account.service";
+import { checkAuthentication } from "../helpers/authentication.helpers";
+import { ICreateUserModels, IUserModels } from "../models/users.models";
+import { ICreateAccountModels } from "../models/accounts.models";
+import { BCryptHasher } from "../utils/hasher";
+import { JWTAuthenticator } from "../authentication";
+import logger from "../logs/logger";
+import moment from "moment";
+import exportExcel from "../utils/exportExcel";
+import { envConfig } from "../config/env.config";
 
 export interface IAddMoreInfosReq {
   firstName: string;
@@ -58,9 +58,6 @@ export interface ICreateUserReq {
 
 export interface IUserRes extends IAddMoreInfosReq {
   id: number;
-  hasCurrentChallenge: boolean;
-  totalRun: number;
-  totalUserRun: number;
 }
 
 export interface ILoginRes {
@@ -73,19 +70,19 @@ const _authenticator = new JWTAuthenticator();
 
 const login = async (
   request: Request,
-  result: Response,
+  result: Response
 ): Promise<Response<any, Record<string, any>>> => {
   const body: { username: string } = request.body;
 
   if (!body.username) {
-    return result.status(400).send({ message: 'Please enter username' });
+    return result.status(400).send({ message: "Please enter username" });
   }
 
   const isEmail = hasEmail(body.username);
   const isPhoneNumber = hasPhoneNumber(body.username);
 
   if (!isEmail && !isPhoneNumber) {
-    return result.status(400).send({ message: 'Username is not valid' });
+    return result.status(400).send({ message: "Username is not valid" });
   }
 
   const isSend = await sendOTPCode(body.username);
@@ -99,7 +96,7 @@ const login = async (
 
 const confirmLogin = async (
   request: Request,
-  result: Response,
+  result: Response
 ): Promise<Response<any, Record<string, any>>> => {
   const body: ILoginRes = request.body;
   const otpCode = body.otpCode;
@@ -110,17 +107,17 @@ const confirmLogin = async (
   const isPhoneNumber = hasPhoneNumber(body.username);
 
   if (!isEmail && !isPhoneNumber) {
-    return result.status(400).send({ message: 'Username is not valid' });
+    return result.status(400).send({ message: "Username is not valid" });
   }
   if (!otpCode) {
-    return result.status(400).send({ message: 'OTP is required' });
+    return result.status(400).send({ message: "OTP is required" });
   }
 
   // get otp code in data
   const otp = await OTPService.getByCode(otpCode);
 
   if (!otp) {
-    return result.status(400).send({ message: 'OTP is not available' });
+    return result.status(400).send({ message: "OTP is not available" });
   }
 
   // check otp if not valid then
@@ -131,11 +128,11 @@ const confirmLogin = async (
       otp.type === OTPType.Login
     )
   ) {
-    return result.status(400).send({ message: 'OTP is not available' });
+    return result.status(400).send({ message: "OTP is not available" });
   }
 
-  console.log('isPhoneNumber', isPhoneNumber);
-  console.log('isEmail', isEmail);
+  console.log("isPhoneNumber", isPhoneNumber);
+  console.log("isEmail", isEmail);
 
   if (isPhoneNumber) {
     // check if phone number is database
@@ -179,7 +176,7 @@ const confirmLogin = async (
 
     if (account.objectStatus === ObjectStatus.DeActive) {
       return result.status(400).send({
-        message: 'User is inactive',
+        message: "User is inactive",
       });
     }
 
@@ -207,7 +204,7 @@ const confirmLogin = async (
     // if exit database then create
     if (!account) {
       const referralCode = await generateReferralCode();
-      console.log('referralCode', referralCode);
+      console.log("referralCode", referralCode);
 
       // save token to server
       const newAccount = await AccountService.create({
@@ -240,7 +237,7 @@ const confirmLogin = async (
 
     if (account.objectStatus === ObjectStatus.DeActive) {
       return result.status(400).send({
-        message: 'User is inactive',
+        message: "User is inactive",
       });
     }
 
@@ -268,7 +265,7 @@ const confirmLogin = async (
 
 const logout = async (
   request: Request,
-  result: Response,
+  result: Response
 ): Promise<Response<any, Record<string, any>>> => {
   const username = request.params.username;
   const authUser = await checkAuthentication(request);
@@ -278,56 +275,56 @@ const logout = async (
 
   const account = await AccountService.getByUserName(username);
   if (!account) {
-    return result.status(400).send({ message: 'User not found' });
+    return result.status(400).send({ message: "User not found" });
   }
 
-  await AccountService.updateToken(username, '', true);
+  await AccountService.updateToken(username, "", true);
 
-  return result.send({ message: 'Logged out' });
+  return result.send({ message: "Logged out" });
 };
 
 const loginAdmin = async (
   request: Request,
-  result: Response,
+  result: Response
 ): Promise<Response<any, Record<string, any>>> => {
   const body: { username: string; password: string } = request.body;
 
   if (!body.username) {
-    return result.status(400).send({ message: 'Please enter username' });
+    return result.status(400).send({ message: "Please enter username" });
   }
   if (!body.password) {
-    return result.status(400).send({ message: 'Please enter password' });
+    return result.status(400).send({ message: "Please enter password" });
   }
 
   const account = await AccountService.getByUserName(body.username);
 
   if (!account) {
     return result.status(400).send({
-      message: 'Username or password incorrect',
+      message: "Username or password incorrect",
     });
   }
 
   if (account.objectStatus === ObjectStatus.DeActive) {
     return result.status(400).send({
-      message: 'User is inactive',
+      message: "User is inactive",
     });
   }
 
   const isValid = await _bCryptHasher.verifyPassword(
     body.password,
-    account.password,
+    account.password
   );
 
   if (!account || !isValid) {
     return result
       .status(400)
-      .send({ message: 'Username or password incorrect' });
+      .send({ message: "Username or password incorrect" });
   }
 
   const user = await UserService.getByAccountId(account.id);
   const token = await _authenticator.authenticate(
     user ? user : ({} as IUserModels),
-    account,
+    account
   );
 
   // save new token to server
@@ -335,13 +332,13 @@ const loginAdmin = async (
 
   return result.send({
     token: token,
-    user: user ? UserService.toModel(user, null, 0) : null,
+    user: user ? UserService.toModel(user) : null,
   });
 };
 
 const createAdminUser = async (
   request: Request,
-  result: Response,
+  result: Response
 ): Promise<Response<any, Record<string, any>>> => {
   const data: ICreateUserReq = request.body;
 
@@ -357,18 +354,18 @@ const createAdminUser = async (
 
   if (errorMessage.length) {
     return result.status(400).send({
-      message: errorMessage.join(', '),
+      message: errorMessage.join(", "),
     });
   }
 
-  if (data.role === 'SuperAdmin' && authUser.role === Roles.Admin) {
+  if (data.role === "SuperAdmin" && authUser.role === Roles.Admin) {
     return result.status(403).send(new PermissionError().toModel());
   }
 
   const account = await AccountService.getByUserName(data.username);
 
   if (account) {
-    return result.status(400).send({ message: 'Username has been used!' });
+    return result.status(400).send({ message: "Username has been used!" });
   }
 
   const password = generateOTP();
@@ -380,7 +377,7 @@ const createAdminUser = async (
   const accountData: ICreateAccountModels = {
     username: data.username,
     password: passwordHash,
-    token: '',
+    token: "",
     hasExpired: true,
     role: data.role || Roles.Admin,
     createdBy: authUser.id.toString(),
@@ -412,12 +409,12 @@ const createAdminUser = async (
     return result.status(500).send(new ReporingError().toModel());
   }
 
-  return result.send({ message: 'Success' });
+  return result.send({ message: "Success" });
 };
 
 const updateAdminUser = async (
   request: Request,
-  result: Response,
+  result: Response
 ): Promise<Response<any, Record<string, any>>> => {
   const accountId = Number(request.params.accountId);
   const data: ICreateUserReq & { status: ObjectStatus } = request.body;
@@ -434,17 +431,17 @@ const updateAdminUser = async (
 
   if (errorMessage.length) {
     return result.status(400).send({
-      message: errorMessage.join(', '),
+      message: errorMessage.join(", "),
     });
   }
 
-  if (data.role === 'SuperAdmin' && authUser.role === Roles.Admin) {
+  if (data.role === "SuperAdmin" && authUser.role === Roles.Admin) {
     return result.status(403).send(new PermissionError().toModel());
   }
 
   const account = await AccountService.getById(accountId);
   if (!account) {
-    return result.status(400).send({ message: 'Account not found' });
+    return result.status(400).send({ message: "Account not found" });
   }
 
   const user = await UserService.getByAccountId(accountId);
@@ -478,12 +475,12 @@ const updateAdminUser = async (
     }
   }
 
-  return result.send({ message: 'Success' });
+  return result.send({ message: "Success" });
 };
 
 const getUsers = async (
   request: Request,
-  result: Response,
+  result: Response
 ): Promise<Response<any, Record<string, any>>> => {
   const query = request.query;
 
@@ -504,7 +501,7 @@ const getUsers = async (
 
 const updatePassowrd = async (
   request: Request,
-  result: Response,
+  result: Response
 ): Promise<Response<any, Record<string, any>>> => {
   const data: { newPassword: string; accountId: number } = request.body;
 
@@ -518,13 +515,13 @@ const updatePassowrd = async (
   }
   if (!data.newPassword) {
     return result.status(400).send({
-      message: 'New password is required',
+      message: "New password is required",
     });
   }
 
   const account = await AccountService.getById(data.accountId);
   if (!account) {
-    return result.status(400).send({ message: 'Account not found' });
+    return result.status(400).send({ message: "Account not found" });
   }
 
   if (
@@ -537,7 +534,7 @@ const updatePassowrd = async (
   if (await _bCryptHasher.verifyPassword(data.newPassword, account.password)) {
     return result
       .status(400)
-      .send({ message: 'New password should not same old password' });
+      .send({ message: "New password should not same old password" });
   }
 
   // hash password
@@ -546,17 +543,17 @@ const updatePassowrd = async (
   const hasUpdate = await AccountService.updatePassword(
     data.accountId,
     passwordHash,
-    authUser.id,
+    authUser.id
   );
 
   if (!hasUpdate) return result.status(500).send(new ReporingError().toModel());
 
-  return result.send({ message: 'Success' });
+  return result.send({ message: "Success" });
 };
 
 const deleteUserAsync = async (
   request: Request,
-  result: Response,
+  result: Response
 ): Promise<Response<any, Record<string, any>>> => {
   const authUser = await checkAuthentication(request, [Roles.SuperAdmin]);
   if (!authUser) {
@@ -568,21 +565,21 @@ const deleteUserAsync = async (
   if (authUser.id === userId) {
     return result
       .status(400)
-      .send({ code: 400, message: 'Không thể xoá tại khoản hiện tại!' });
+      .send({ code: 400, message: "Không thể xoá tại khoản hiện tại!" });
   }
 
   const hasDelete = await AccountService.delete(userId);
 
-  if (!hasDelete) return result.status(400).send({ message: 'Không thể xoá!' });
+  if (!hasDelete) return result.status(400).send({ message: "Không thể xoá!" });
 
-  logger.info(JSON.stringify({ ...authUser, message: 'delete user' }));
+  logger.info(JSON.stringify({ ...authUser, message: "delete user" }));
 
-  return result.send({ message: 'Success' });
+  return result.send({ message: "Success" });
 };
 
 const reportAccount = async (
   request: Request,
-  result: Response,
+  result: Response
 ): Promise<Response<any, Record<string, any>>> => {
   const query = request.query;
 
@@ -597,15 +594,15 @@ const reportAccount = async (
   const accounts = await AccountService.getListAccountReport(query);
 
   const columns = [
-    { header: 'ID', key: 'id', width: 10 },
-    { header: 'Tài khoản', key: 'username', width: 15 },
-    { header: 'Họ', key: 'lastName', width: 15 },
-    { header: 'Tên', key: 'firstName', width: 15 },
-    { header: 'Email', key: 'email', width: 20 },
-    { header: 'Số điện thoại', key: 'phoneNumber', width: 15 },
-    { header: 'Ngày sinh', key: 'dateOfBirth', width: 15 },
-    { header: 'Loại tài khoản', key: 'role', width: 15 },
-    { header: 'Địa chỉ', key: 'address', width: 15 },
+    { header: "ID", key: "id", width: 10 },
+    { header: "Tài khoản", key: "username", width: 15 },
+    { header: "Họ", key: "lastName", width: 15 },
+    { header: "Tên", key: "firstName", width: 15 },
+    { header: "Email", key: "email", width: 20 },
+    { header: "Số điện thoại", key: "phoneNumber", width: 15 },
+    { header: "Ngày sinh", key: "dateOfBirth", width: 15 },
+    { header: "Loại tài khoản", key: "role", width: 15 },
+    { header: "Địa chỉ", key: "address", width: 15 },
   ];
 
   // Looping through User data
@@ -613,8 +610,8 @@ const reportAccount = async (
     return {
       ...item,
       dateOfBirth: item.dateOfBirth
-        ? moment(item.dateOfBirth).format('YYYY-MM-DD')
-        : '',
+        ? moment(item.dateOfBirth).format("YYYY-MM-DD")
+        : "",
     };
   });
 
@@ -624,15 +621,15 @@ const reportAccount = async (
     result.send(bufferFile);
   } catch (err) {
     result.send({
-      status: 'error',
-      message: 'Something went wrong',
+      status: "error",
+      message: "Something went wrong",
     });
   }
 };
 
 const updateFCMToken = async (
   request: Request,
-  result: Response,
+  result: Response
 ): Promise<Response<any, Record<string, any>>> => {
   const data: { fcmToken: string } = request.body;
 
@@ -643,21 +640,21 @@ const updateFCMToken = async (
   }
   if (!data.fcmToken) {
     return result.status(400).send({
-      message: 'FCM token bắt buộc nhập',
+      message: "FCM token bắt buộc nhập",
     });
   }
 
   const hasUpdate = await AccountService.updateFCMToken(
     authUser.id,
-    data.fcmToken,
+    data.fcmToken
   );
   if (!hasUpdate) {
-    return result.status(400).send({ message: 'Không thể cập nhật' });
+    return result.status(400).send({ message: "Không thể cập nhật" });
   }
 
   if (!hasUpdate) return result.status(500).send(new ReporingError().toModel());
 
-  return result.send({ message: 'Success' });
+  return result.send({ message: "Success" });
 };
 
 const sendOTPCode = async (username: string): Promise<boolean> => {
@@ -679,7 +676,7 @@ const sendOTPCode = async (username: string): Promise<boolean> => {
     OTPService.sendOTPCodeToPhoneNumber(username, content);
 
   if (hasEmail(username)) {
-    sendEmail(username, content, 'Send OTP Code');
+    sendEmail(username, content, "Send OTP Code");
   }
 
   return true;
@@ -687,11 +684,11 @@ const sendOTPCode = async (username: string): Promise<boolean> => {
 
 const validateCreateUser = (
   data: ICreateUserReq,
-  isCreate: boolean = true,
+  isCreate: boolean = true
 ): string[] => {
   const errorDatas = {
-    firstName: 'First name is required',
-    lastName: 'Last name is required',
+    firstName: "First name is required",
+    lastName: "Last name is required",
   };
 
   let message: string[] = [];
@@ -703,13 +700,13 @@ const validateCreateUser = (
   });
 
   if (isCreate && !data.username) {
-    message.push('Username is required');
+    message.push("Username is required");
   }
   if (data.email && !hasEmail(data.email)) {
-    message.push('Email is not correct');
+    message.push("Email is not correct");
   }
   if (data.phoneNumber && !hasPhoneNumber(data.phoneNumber)) {
-    message.push('Phone number is not correct');
+    message.push("Phone number is not correct");
   }
 
   return message;

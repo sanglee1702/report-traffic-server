@@ -1,13 +1,12 @@
-import { Op } from 'sequelize';
-import { MAX_PAGE_SIZE } from '../config';
-import { IUserRes } from '../controllers/auth.controllers';
-import logger from '../logs/logger';
-import dbContext from '../models';
-import { BasePagingReq, BasePagingRes } from '../models/common/models.type';
-import { ObjectStatus, Roles } from '../models/common/models.enum';
-import { IUserChallengeModels } from '../models/user.challenge.models';
-import { ICreateUserModels, IUserModels } from '../models/users.models';
-import { getOrderQuery } from './helpers';
+import { Op } from "sequelize";
+import { MAX_PAGE_SIZE } from "../config";
+import { IUserRes } from "../controllers/auth.controllers";
+import logger from "../logs/logger";
+import dbContext from "../models";
+import { BasePagingReq, BasePagingRes } from "../models/common/models.type";
+import { ObjectStatus, Roles } from "../models/common/models.enum";
+import { ICreateUserModels, IUserModels } from "../models/users.models";
+import { getOrderQuery } from "./helpers";
 
 export interface IUserService {
   create: (models: ICreateUserModels) => Promise<IUserModels | null>;
@@ -17,13 +16,9 @@ export interface IUserService {
   getByEmail: (email: string) => Promise<IUserModels | null>;
   update: (id: number, user: ICreateUserModels) => Promise<boolean>;
   disabled: (id: number, userId: number) => Promise<boolean>;
-  toModel: (
-    user: IUserModels,
-    currentChallenge: IUserChallengeModels | null,
-    totalUserRun: number,
-  ) => IUserRes;
+  toModel: (user: IUserModels) => IUserRes;
   getList: (
-    params: BasePagingReq & { role: Roles[] },
+    params: BasePagingReq & { role: Roles[] }
   ) => Promise<BasePagingRes<IUserModels> | null>;
 }
 
@@ -60,7 +55,7 @@ const getById = async (id: number): Promise<IUserModels | null> => {
   return null;
 };
 const getByAccountId = async (
-  accountId: number,
+  accountId: number
 ): Promise<IUserModels | null> => {
   const res = await _usersContext
     .findOne({
@@ -75,7 +70,7 @@ const getByAccountId = async (
   return null;
 };
 const getByPhoneNumber = async (
-  phoneNumber: string,
+  phoneNumber: string
 ): Promise<IUserModels | null> => {
   const res = await _usersContext
     .findOne({
@@ -104,14 +99,14 @@ const getByEmail = async (email: string): Promise<IUserModels | null> => {
 };
 const update = async (
   id: number,
-  user: ICreateUserModels,
+  user: ICreateUserModels
 ): Promise<boolean> => {
   const res = await _usersContext
     .update(
       { ...user },
       {
         where: { id },
-      },
+      }
     )
     .catch((err) => {
       logger.error(err);
@@ -129,7 +124,7 @@ const disabled = async (id: number, userId: number): Promise<boolean> => {
       { objectStatus: ObjectStatus.DeActive, updatedBy: userId.toString() },
       {
         where: { id },
-      },
+      }
     )
     .catch((err) => {
       logger.error(err);
@@ -142,7 +137,7 @@ const disabled = async (id: number, userId: number): Promise<boolean> => {
   }
 };
 const getList = async (
-  params: BasePagingReq & { role: Roles[] },
+  params: BasePagingReq & { role: Roles[] }
 ): Promise<BasePagingRes<IUserModels> | null> => {
   const page = Number(params.page) || 1;
   const pageSize = Number(params.pageSize)
@@ -194,11 +189,7 @@ const getList = async (
   };
 };
 
-const toModel = (
-  user: IUserModels,
-  currentChallenge: IUserChallengeModels | null,
-  totalUserRun: number,
-): IUserRes => {
+const toModel = (user: IUserModels): IUserRes => {
   return {
     id: user.id,
     accountId: user.accountId,
@@ -212,9 +203,6 @@ const toModel = (
     companyId: user.companyId ?? null,
     height: user.height ?? null,
     weight: user.weight ?? null,
-    hasCurrentChallenge: !!currentChallenge?.isPaid,
-    totalRun: currentChallenge?.totalRun,
-    totalUserRun,
   };
 };
 
