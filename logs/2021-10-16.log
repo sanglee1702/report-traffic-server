@@ -1,0 +1,37 @@
+{"level":"error"}
+{"host":"localhost:8000","connection":"keep-alive","sec-ch-ua":"\"Chromium\";v=\"94\", \"Google Chrome\";v=\"94\", \";Not A Brand\";v=\"99\"","accept":"application/json, text/plain, */*","authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6bnVsbCwiZnVsbE5hbWUiOiIgIiwiYXZhdGFyVXJsIjpudWxsLCJwaG9uZU51bWJlciI6bnVsbCwicm9sZSI6IlN1cGVyQWRtaW4iLCJ1c2VybmFtZSI6InN1cGVyYWRtaW4iLCJpYXQiOjE2MzQyOTMyMDJ9.euObXWq05RXRN0DzUGcH0Qz-FcIcLSOiokbwFkA7fWk","sec-ch-ua-mobile":"?0","user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36","sec-ch-ua-platform":"\"macOS\"","origin":"http://localhost:3002","sec-fetch-site":"same-site","sec-fetch-mode":"cors","sec-fetch-dest":"empty","referer":"http://localhost:3002/","accept-encoding":"gzip, deflate, br","accept-language":"en-US,en;q=0.9,vi;q=0.8","if-none-match":"W/\"10ed-v0kJZlmLdvvHEnQNH9qr+n1LGHQ\"","message":"401 Unauthorized","level":"error"}
+{"level":"error"}
+{"host":"localhost:8000","connection":"keep-alive","content-length":"74","sec-ch-ua":"\"Chromium\";v=\"94\", \"Google Chrome\";v=\"94\", \";Not A Brand\";v=\"99\"","accept":"application/json, text/plain, */*","content-type":"application/json","authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6bnVsbCwiZnVsbE5hbWUiOiIgIiwiYXZhdGFyVXJsIjpudWxsLCJwaG9uZU51bWJlciI6bnVsbCwicm9sZSI6IlN1cGVyQWRtaW4iLCJ1c2VybmFtZSI6InN1cGVyYWRtaW4iLCJpYXQiOjE2MzQyOTMyMDJ9.euObXWq05RXRN0DzUGcH0Qz-FcIcLSOiokbwFkA7fWk","sec-ch-ua-mobile":"?0","user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36","sec-ch-ua-platform":"\"macOS\"","origin":"http://localhost:3002","sec-fetch-site":"same-site","sec-fetch-mode":"cors","sec-fetch-dest":"empty","referer":"http://localhost:3002/","accept-encoding":"gzip, deflate, br","accept-language":"en-US,en;q=0.9,vi;q=0.8","id":0,"code":"test01","name":"test01","mainCategoryId":1,"avatarUrl":"","message":"401 Unauthorized","level":"error"}
+{"level":"error"}
+{"host":"localhost:8000","connection":"keep-alive","sec-ch-ua":"\"Chromium\";v=\"94\", \"Google Chrome\";v=\"94\", \";Not A Brand\";v=\"99\"","accept":"application/json, text/plain, */*","authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6bnVsbCwiZnVsbE5hbWUiOiIgIiwiYXZhdGFyVXJsIjpudWxsLCJwaG9uZU51bWJlciI6bnVsbCwicm9sZSI6IlN1cGVyQWRtaW4iLCJ1c2VybmFtZSI6InN1cGVyYWRtaW4iLCJpYXQiOjE2MzQzNDg0NzV9.3HdhoLObDQAPC7EHCZgObUqBEOYWfucOOZYxMBqmdek","sec-ch-ua-mobile":"?0","user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36","sec-ch-ua-platform":"\"macOS\"","origin":"http://localhost:3002","sec-fetch-site":"same-site","sec-fetch-mode":"cors","sec-fetch-dest":"empty","referer":"http://localhost:3002/","accept-encoding":"gzip, deflate, br","accept-language":"en-US,en;q=0.9,vi;q=0.8","if-none-match":"W/\"f2-vRZWgpLBtMxCPowsUN9oKBvVGgw\"","message":"401 Unauthorized","level":"error"}
+{"level":"error"}
+{"host":"localhost:8000","connection":"keep-alive","content-length":"74","sec-ch-ua":"\"Chromium\";v=\"94\", \"Google Chrome\";v=\"94\", \";Not A Brand\";v=\"99\"","accept":"application/json, text/plain, */*","content-type":"application/json","authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6bnVsbCwiZnVsbE5hbWUiOiIgIiwiYXZhdGFyVXJsIjpudWxsLCJwaG9uZU51bWJlciI6bnVsbCwicm9sZSI6IlN1cGVyQWRtaW4iLCJ1c2VybmFtZSI6InN1cGVyYWRtaW4iLCJpYXQiOjE2MzQzNDg0NzV9.3HdhoLObDQAPC7EHCZgObUqBEOYWfucOOZYxMBqmdek","sec-ch-ua-mobile":"?0","user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36","sec-ch-ua-platform":"\"macOS\"","origin":"http://localhost:3002","sec-fetch-site":"same-site","sec-fetch-mode":"cors","sec-fetch-dest":"empty","referer":"http://localhost:3002/","accept-encoding":"gzip, deflate, br","accept-language":"en-US,en;q=0.9,vi;q=0.8","id":0,"code":"test01","name":"test01","mainCategoryId":1,"avatarUrl":"","message":"401 Unauthorized","level":"error"}
+{"message":{"authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJseXBodW9jc2FuZzk2QGdtYWlsLmNvbSIsImZ1bGxOYW1lIjoiU2FuZyBMeSIsImF2YXRhclVybCI6bnVsbCwicGhvbmVOdW1iZXIiOm51bGwsInJvbGUiOiJVc2VycyIsInVzZXJuYW1lIjoibHlwaHVvY3Nhbmc5NkBnbWFpbC5jb20iLCJpYXQiOjE2Mjk5ODYxNTR9.XoF03rGXE00tmxVG9epRpegPFRwt2bF9u9CcAgLuv3A","user-agent":"PostmanRuntime/7.28.4","accept":"*/*","postman-token":"40c71ef1-54e1-405e-ba2c-b942b98df047","host":"localhost:8000","accept-encoding":"gzip, deflate, br","connection":"keep-alive"},"level":"error"}
+{"level":"error"}
+{"authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJseXBodW9jc2FuZzk2QGdtYWlsLmNvbSIsImZ1bGxOYW1lIjoiU2FuZyBMeSIsImF2YXRhclVybCI6bnVsbCwicGhvbmVOdW1iZXIiOm51bGwsInJvbGUiOiJVc2VycyIsInVzZXJuYW1lIjoibHlwaHVvY3Nhbmc5NkBnbWFpbC5jb20iLCJpYXQiOjE2Mjk5ODYxNTR9.XoF03rGXE00tmxVG9epRpegPFRwt2bF9u9CcAgLuv3A","user-agent":"PostmanRuntime/7.28.4","accept":"*/*","postman-token":"9e3d444e-3dc7-4557-b11b-c1685776b10e","host":"localhost:8000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","message":"401 Unauthorized","level":"error"}
+{"level":"error"}
+{"authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJseXBodW9jc2FuZzk2QGdtYWlsLmNvbSIsImZ1bGxOYW1lIjoiTGVuIEFpIiwiYXZhdGFyVXJsIjoiaHR0cDovL2xvY2FsaG9zdDo4MDAwL2ZpbGVzL3VzZXJzL2F2YXRhcnMvYTIyNTAyNzgtYTRmYy00MTNmLWJiNTEtNjQwY2MxYzViNmEyLkhFSUMiLCJwaG9uZU51bWJlciI6bnVsbCwicm9sZSI6IlN1cGVyQWRtaW4iLCJ1c2VybmFtZSI6InN1cGVyYWRtaW4iLCJhY2NvdW50SWQiOjIsImlhdCI6MTYzNDM0ODY4OH0._FUFIGprN0Zmu9fEp3pUhJXnP4bqN4MnqYEx43EfmaM","user-agent":"PostmanRuntime/7.28.4","accept":"*/*","postman-token":"cad73328-7853-4028-8481-471032a4af37","host":"localhost:8000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","message":"401 Unauthorized","level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}

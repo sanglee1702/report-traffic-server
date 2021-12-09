@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "target": "es2017",
+    "module": "commonjs",
+    "sourceMap": true,
+    "checkJs": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "esModuleInterop": true,
+    "typeRoots": ["node_modules/@types"],
+    //"baseUrl": "",
+    "resolveJsonModule": true
+  },
+  "include": ["src/**/**.ts", "dist/**/**.js"],
+  "exclude": ["node_modules"]
+}

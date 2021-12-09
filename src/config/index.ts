@@ -1,0 +1,2 @@
+export const MAX_PAGE_SIZE = 200;
+export const HYBRID_CRYTO_RSA_STANDARD = 'RSAES-PKCS1-V1_5';
