@@ -1,6 +1,6 @@
-import { DataTypes, Model, ModelCtor, Sequelize } from 'sequelize';
-import { IBaseModels } from './common/models.type';
-import { ObjectStatus, TableNames } from './common/models.enum';
+import { DataTypes, Model, ModelCtor, Sequelize } from "sequelize";
+import { IBaseModels } from "./common/models.type";
+import { ObjectStatus, TableNames } from "./common/models.enum";
 
 export interface IWardModels extends ICreateWardModels {
   id: number;
@@ -14,7 +14,7 @@ export interface ICreateWardModels extends IBaseModels {
 }
 
 function restWardTable(
-  database: Sequelize,
+  database: Sequelize
 ): ModelCtor<Model<IWardModels, ICreateWardModels>> {
   return database.define(
     TableNames.Wards,
@@ -42,8 +42,8 @@ function restWardTable(
       },
     },
     {
-      charset: 'utf8mb4',
-    },
+      charset: "utf8mb4",
+    }
   );
 }
 

@@ -42,10 +42,6 @@ import restWishlistTable, {
   ICreateWishlistModels,
   IWishlistModels,
 } from "./wishlist.models";
-import restDiscountCodeTable, {
-  ICreateDiscountCodeModels,
-  IDiscountCodeModels,
-} from "./discount.code.models";
 import restProvinceTable, {
   ICreateProvinceModels,
   IProvinceModels,
@@ -56,10 +52,6 @@ import restDistrictTable, {
 } from "./district.models";
 import restWardTable, { ICreateWardModels, IWardModels } from "./ward.models";
 import restFileTable, { ICreateFileModels, IFileModels } from "./files.models";
-import restUserDiscountCodeTable, {
-  ICreateUserDiscountCodeModels,
-  IUserDiscountCodeModels,
-} from "./user.discount.code.models";
 import restNotificationsTable, {
   ICreateNotificationsModels,
   INotificationsModels,
@@ -92,12 +84,6 @@ export interface IDBContext {
   DistrictContext: ModelCtor<Model<IDistrictModels, ICreateDistrictModels>>;
   WardContext: ModelCtor<Model<IWardModels, ICreateWardModels>>;
   FileContext: ModelCtor<Model<IFileModels, ICreateFileModels>>;
-  DiscountCodeContext: ModelCtor<
-    Model<IDiscountCodeModels, ICreateDiscountCodeModels>
-  >;
-  UserDiscountCodeContext: ModelCtor<
-    Model<IUserDiscountCodeModels, ICreateUserDiscountCodeModels>
-  >;
   NotificationsContext: ModelCtor<
     Model<INotificationsModels, ICreateNotificationsModels>
   >;
@@ -142,12 +128,10 @@ dbContext.OtpContext = restOTPTable(database);
 dbContext.CompanyEmployeeContext = restCompanyEmployeeTable(database);
 dbContext.GroupUserContext = restGroupUserTable(database);
 dbContext.WishlistContext = restWishlistTable(database);
-dbContext.DiscountCodeContext = restDiscountCodeTable(database);
 dbContext.ProvinceContext = restProvinceTable(database);
 dbContext.DistrictContext = restDistrictTable(database);
 dbContext.WardContext = restWardTable(database);
 dbContext.FileContext = restFileTable(database);
-dbContext.UserDiscountCodeContext = restUserDiscountCodeTable(database);
 dbContext.NotificationsContext = restNotificationsTable(database);
 
 // get
