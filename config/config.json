@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "As123bc!!",
-    "database": "gofun_local",
+    "database": "report_traffic_local",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
