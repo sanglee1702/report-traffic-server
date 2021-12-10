@@ -2,35 +2,30 @@ import { DataTypes, Model, ModelCtor, Sequelize } from "sequelize";
 import { IBaseModels } from "./common/models.type";
 import { ObjectStatus, TableNames } from "./common/models.enum";
 
-export interface OTPModels extends ICreateOTPModels {
+export interface ICategoryModels extends ICreateCategoryModels {
   id: number;
 }
 
-export enum OTPType {
-  Login = "Login",
-}
-
-export interface ICreateOTPModels extends IBaseModels {
+export interface ICreateCategoryModels extends IBaseModels {
+  name: string;
   code: string;
-  username: string;
-  type: OTPType;
+  level: string;
 }
 
-function restOTPTable(
+function restCategoryTable(
   database: Sequelize
-): ModelCtor<Model<OTPModels, ICreateOTPModels>> {
+): ModelCtor<Model<ICategoryModels, ICreateCategoryModels>> {
   return database.define(
-    TableNames.OTPCodes,
+    TableNames.Categories,
     {
+      name: {
+        type: DataTypes.STRING,
+      },
       code: {
         type: DataTypes.STRING,
-        validate: { notEmpty: true },
       },
-      username: {
+      level: {
         type: DataTypes.STRING,
-      },
-      type: {
-        type: DataTypes.ENUM(...Object.values(OTPType)),
       },
       objectStatus: {
         type: DataTypes.ENUM(ObjectStatus.Active, ObjectStatus.DeActive),
@@ -48,4 +43,4 @@ function restOTPTable(
   );
 }
 
-export default restOTPTable;
+export default restCategoryTable;

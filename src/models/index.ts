@@ -20,15 +20,7 @@ import restGroupsTable, {
   ICreateGroupsModels,
   IGroupsModels,
 } from "./groups.models";
-import restPaymentHistoriesTable, {
-  ICreatePaymentHistoriesModels,
-  IPaymentHistoriesModels,
-} from "./payment.histories.models";
 import restOTPTable, { ICreateOTPModels, OTPModels } from "./otp.models";
-import restUserChallengeTable, {
-  ICreateUserChallengeModels,
-  IUserChallengeModels,
-} from "./user.challenge.models";
 import restUsersTable, { ICreateUserModels, IUserModels } from "./users.models";
 import restCompanyEmployeeTable, {
   ICompanyEmployeeModels,
@@ -38,10 +30,6 @@ import restGroupUserTable, {
   ICreateGroupUserModels,
   IGroupUserModels,
 } from "./user.groups.models";
-import restWishlistTable, {
-  ICreateWishlistModels,
-  IWishlistModels,
-} from "./wishlist.models";
 import restProvinceTable, {
   ICreateProvinceModels,
   IProvinceModels,
@@ -56,6 +44,10 @@ import restNotificationsTable, {
   ICreateNotificationsModels,
   INotificationsModels,
 } from "./notifications.models";
+import restCategoryTable, {
+  ICategoryModels,
+  ICreateCategoryModels,
+} from "./category.models";
 
 export interface IDBContext {
   databaseConfig: Sequelize;
@@ -65,21 +57,15 @@ export interface IDBContext {
   PointHistoriesContext: ModelCtor<
     Model<IPointsHistoriesModels, ICreatePointsHistoriesModels>
   >;
+  CategoriesContext: ModelCtor<Model<ICategoryModels, ICreateCategoryModels>>;
   PointContext: ModelCtor<Model<IPointsModels, ICreatePointsModels>>;
   CompanyContext: ModelCtor<Model<ICompanyModels, ICreateCompanyModels>>;
   GroupsContext: ModelCtor<Model<IGroupsModels, ICreateGroupsModels>>;
-  PaymentHistoriesContext: ModelCtor<
-    Model<IPaymentHistoriesModels, ICreatePaymentHistoriesModels>
-  >;
-  UserChallengensContext: ModelCtor<
-    Model<IUserChallengeModels, ICreateUserChallengeModels>
-  >;
   OtpContext: ModelCtor<Model<OTPModels, ICreateOTPModels>>;
   CompanyEmployeeContext: ModelCtor<
     Model<ICompanyEmployeeModels, ICreateCompanyEmployeeModels>
   >;
   GroupUserContext: ModelCtor<Model<IGroupUserModels, ICreateGroupUserModels>>;
-  WishlistContext: ModelCtor<Model<IWishlistModels, ICreateWishlistModels>>;
   ProvinceContext: ModelCtor<Model<IProvinceModels, ICreateProvinceModels>>;
   DistrictContext: ModelCtor<Model<IDistrictModels, ICreateDistrictModels>>;
   WardContext: ModelCtor<Model<IWardModels, ICreateWardModels>>;
@@ -122,17 +108,15 @@ dbContext.PointHistoriesContext = restPointsHistoriesTable(database);
 dbContext.PointContext = restPointsTable(database);
 dbContext.CompanyContext = restCompanyTable(database);
 dbContext.GroupsContext = restGroupsTable(database);
-dbContext.PaymentHistoriesContext = restPaymentHistoriesTable(database);
-dbContext.UserChallengensContext = restUserChallengeTable(database);
 dbContext.OtpContext = restOTPTable(database);
 dbContext.CompanyEmployeeContext = restCompanyEmployeeTable(database);
 dbContext.GroupUserContext = restGroupUserTable(database);
-dbContext.WishlistContext = restWishlistTable(database);
 dbContext.ProvinceContext = restProvinceTable(database);
 dbContext.DistrictContext = restDistrictTable(database);
 dbContext.WardContext = restWardTable(database);
 dbContext.FileContext = restFileTable(database);
 dbContext.NotificationsContext = restNotificationsTable(database);
+dbContext.CategoriesContext = restCategoryTable(database);
 
 // get
 dbContext.AccountsContext.hasOne(dbContext.UsersContext, {
