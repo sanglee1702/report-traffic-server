@@ -95,16 +95,6 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        name: "Tỉ lệ thoát trang",
-        code: "tilethoattrang",
-        level: 3,
-        parentId: 4,
-        groupId: 1,
-        objectStatus: "active",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
         name: "Lượt truy cập",
         code: "luottruycap",
         level: 3,
