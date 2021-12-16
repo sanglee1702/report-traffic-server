@@ -15,6 +15,8 @@ export interface ICategoryRes {
   name: string;
   code: string;
   level: string;
+  parentId?: number;
+  groupId?: number;
   status: ObjectStatus;
   createdAt: string;
   updatedAt: string;
@@ -179,6 +181,8 @@ const toModel = (_category: ICategoryModels): ICategoryRes => {
     name: _category.name,
     code: _category.code,
     level: _category.level,
+    parentId: _category.parentId,
+    groupId: _category.groupId,
     status: _category.objectStatus,
     createdAt: _category.createdAt,
     updatedAt: _category.updatedAt,

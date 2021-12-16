@@ -30,6 +30,8 @@ const create = async (
     name: data.name,
     code: data.code,
     level: data.level,
+    parentId: data.parentId,
+    groupId: data.groupId,
     createdBy: authUser.id.toString(),
   };
   const category = await CategoryService.create(params);
@@ -68,6 +70,8 @@ const update = async (
     name: data.name,
     code: data.code,
     level: data.level,
+    parentId: data.parentId,
+    groupId: data.groupId,
     createdBy: authUser.id.toString(),
     objectStatus: data.status,
   };
