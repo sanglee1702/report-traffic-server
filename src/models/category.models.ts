@@ -10,6 +10,8 @@ export interface ICreateCategoryModels extends IBaseModels {
   name: string;
   code: string;
   level: string;
+  parentId?: number;
+  groupId?: number;
 }
 
 function restCategoryTable(
@@ -26,6 +28,12 @@ function restCategoryTable(
       },
       level: {
         type: DataTypes.STRING,
+      },
+      parentId: {
+        type: DataTypes.INTEGER,
+      },
+      groupId: {
+        type: DataTypes.INTEGER,
       },
       objectStatus: {
         type: DataTypes.ENUM(ObjectStatus.Active, ObjectStatus.DeActive),
