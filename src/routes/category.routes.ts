@@ -5,11 +5,9 @@ const CategoryRouter = express.Router();
 
 const CATEGORY_PATH = "/category";
 
-// login
+CategoryRouter.get(`${CATEGORY_PATH}/getList`, CategoryControllers.getList);
 CategoryRouter.post(`${CATEGORY_PATH}/create`, CategoryControllers.create);
 CategoryRouter.put(`${CATEGORY_PATH}/update`, CategoryControllers.update);
-CategoryRouter.get(`${CATEGORY_PATH}/admin/users`, CategoryControllers.getList);
-// delete product category
 CategoryRouter.delete(
   `${CATEGORY_PATH}/delete/:id`,
   CategoryControllers.deleteAsync

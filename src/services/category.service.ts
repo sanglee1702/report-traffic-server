@@ -122,9 +122,8 @@ const getList = async (
   });
 
   if (res) {
-    const productsMain = res.rows.map((item) => toModel(item.get()));
     return {
-      items: productsMain,
+      items: res.rows.map((item) => item.get()),
       total: res.count,
       page: page,
       pageSize: pageSize,

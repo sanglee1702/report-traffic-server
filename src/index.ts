@@ -16,6 +16,7 @@ import CommonRouter from "./routes/common.routes";
 import NotificationsRouter from "./routes/notifications.routes";
 import UserRouter from "./routes/user.routes";
 import admin, { initializeApp } from "firebase-admin";
+import CategoryRouter from "./routes/category.routes";
 
 const serviceAccount = require("../config/gofun-333404-firebase-adminsdk-jsff7-0b4e6780c7.json");
 
@@ -36,6 +37,7 @@ const init = () => {
     CommonRouter,
     NotificationsRouter,
     UserRouter,
+    CategoryRouter,
   ];
 
   server.use(cors());
