@@ -13,7 +13,6 @@ export enum ObjectStatus {
 export enum TableNames {
   Accounts = "Accounts",
   Users = "Users",
-  Groups = "Groups",
   Companies = "Companies",
   Points = "Points",
   PointHistories = "PointHistories",
@@ -39,6 +38,7 @@ export enum TableNames {
   Notifications = "Notifications",
   CardLink = "CardLinks",
   Categories = "Categories",
+  GroupCategories = "GroupCategories",
 }
 
 export enum OrderDirection {

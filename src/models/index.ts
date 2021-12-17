@@ -16,10 +16,6 @@ import restCompanyTable, {
   ICompanyModels,
   ICreateCompanyModels,
 } from "./company.models";
-import restGroupsTable, {
-  ICreateGroupsModels,
-  IGroupsModels,
-} from "./groups.models";
 import restOTPTable, { ICreateOTPModels, OTPModels } from "./otp.models";
 import restUsersTable, { ICreateUserModels, IUserModels } from "./users.models";
 import restCompanyEmployeeTable, {
@@ -48,6 +44,10 @@ import restCategoryTable, {
   ICategoryModels,
   ICreateCategoryModels,
 } from "./category.models";
+import restGroupCategoryTable, {
+  ICreateGroupCategoryModels,
+  IGroupCategoryModels,
+} from "./group.category.models";
 
 export interface IDBContext {
   databaseConfig: Sequelize;
@@ -58,9 +58,11 @@ export interface IDBContext {
     Model<IPointsHistoriesModels, ICreatePointsHistoriesModels>
   >;
   CategoriesContext: ModelCtor<Model<ICategoryModels, ICreateCategoryModels>>;
+  GroupCategoriesContext: ModelCtor<
+    Model<IGroupCategoryModels, ICreateGroupCategoryModels>
+  >;
   PointContext: ModelCtor<Model<IPointsModels, ICreatePointsModels>>;
   CompanyContext: ModelCtor<Model<ICompanyModels, ICreateCompanyModels>>;
-  GroupsContext: ModelCtor<Model<IGroupsModels, ICreateGroupsModels>>;
   OtpContext: ModelCtor<Model<OTPModels, ICreateOTPModels>>;
   CompanyEmployeeContext: ModelCtor<
     Model<ICompanyEmployeeModels, ICreateCompanyEmployeeModels>
@@ -107,7 +109,6 @@ dbContext.AccountsContext = restAccountTable(database);
 dbContext.PointHistoriesContext = restPointsHistoriesTable(database);
 dbContext.PointContext = restPointsTable(database);
 dbContext.CompanyContext = restCompanyTable(database);
-dbContext.GroupsContext = restGroupsTable(database);
 dbContext.OtpContext = restOTPTable(database);
 dbContext.CompanyEmployeeContext = restCompanyEmployeeTable(database);
 dbContext.GroupUserContext = restGroupUserTable(database);
@@ -117,6 +118,7 @@ dbContext.WardContext = restWardTable(database);
 dbContext.FileContext = restFileTable(database);
 dbContext.NotificationsContext = restNotificationsTable(database);
 dbContext.CategoriesContext = restCategoryTable(database);
+dbContext.GroupCategoriesContext = restGroupCategoryTable(database);
 
 // get
 dbContext.AccountsContext.hasOne(dbContext.UsersContext, {
