@@ -9,6 +9,7 @@ import {
   ICategoryModels,
   ICreateCategoryModels,
 } from "../models/category.models";
+import { IGroupCategoryModels } from "../models/group.category.models";
 
 export interface ICategoryRes {
   id: number;
@@ -17,6 +18,7 @@ export interface ICategoryRes {
   level: string;
   parentId?: number;
   groupId?: number;
+  groupName?: string;
   status: ObjectStatus;
   createdAt: string;
   updatedAt: string;
@@ -30,7 +32,10 @@ export interface ICategoryService {
     params: BasePagingReq
   ) => Promise<BasePagingRes<ICategoryModels> | null>;
   disabled: (id: number) => Promise<boolean>;
-  toModel: (category: ICategoryModels) => ICategoryRes;
+  toModel: (
+    category: ICategoryModels,
+    groupCategory?: IGroupCategoryModels
+  ) => ICategoryRes;
   delete: (id: number) => Promise<boolean>;
 }
 
@@ -127,7 +132,6 @@ const getList = async (
   const res = await _categoryContext.findAndCountAll(option).catch((err) => {
     logger.error(err);
   });
-  console.log("res: ", res);
 
   if (res) {
     return {
@@ -181,7 +185,10 @@ const deleteAsync = async (id: number): Promise<boolean> => {
   }
 };
 
-const toModel = (_category: ICategoryModels): ICategoryRes => {
+const toModel = (
+  _category: ICategoryModels,
+  _groupCategory?: IGroupCategoryModels
+): ICategoryRes => {
   const category: ICategoryRes = {
     id: _category.id,
     name: _category.name,
@@ -189,6 +196,7 @@ const toModel = (_category: ICategoryModels): ICategoryRes => {
     level: _category.level,
     parentId: _category.parentId,
     groupId: _category.groupId,
+    groupName: _groupCategory?.name,
     status: _category.objectStatus,
     createdAt: _category.createdAt,
     updatedAt: _category.updatedAt,

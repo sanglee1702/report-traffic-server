@@ -114,7 +114,9 @@ const getList = async (
 
   return result.send({
     ...categories,
-    items: categories.items.map((article) => CategoryService.toModel(article)),
+    items: categories.items.map((category) =>
+      CategoryService.toModel(category, (category as any).GroupCategory)
+    ),
   });
 };
 
@@ -122,15 +124,15 @@ const getById = async (
   request: Request,
   result: Response
 ): Promise<Response<any, Record<string, any>>> => {
-  const id = Number(request.params.articleId);
+  const id = Number(request.params.categoryId);
 
-  const article = await CategoryService.getById(id);
+  const category = await CategoryService.getById(id);
 
-  if (!article) {
+  if (!category) {
     return result.send({ message: "Article not found" });
   }
 
-  return result.send(CategoryService.toModel(article));
+  return result.send(CategoryService.toModel(category));
 };
 
 const deleteAsync = async (
