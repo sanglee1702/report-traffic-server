@@ -106,15 +106,15 @@ const getList = async (
     sortNames: query.sortNames,
     status: query.status,
   };
-  const articles = await CategoryService.getList(params);
+  const categories = await CategoryService.getList(params);
 
-  if (!articles) {
+  if (!categories) {
     result.status(500).send(new ReporingError().toModel());
   }
 
   return result.send({
-    ...articles,
-    items: articles.items.map((article) => CategoryService.toModel(article)),
+    ...categories,
+    items: categories.items.map((article) => CategoryService.toModel(article)),
   });
 };
 

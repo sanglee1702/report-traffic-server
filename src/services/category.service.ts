@@ -103,7 +103,12 @@ const getList = async (
   let option: any = {
     where: {},
     order: getOrderQuery(params.sortNames, params.sortDirections),
-    include: [],
+    include: [
+      {
+        model: dbContext.GroupCategoriesContext,
+        required: false,
+      },
+    ],
   };
 
   if (params.status) {
@@ -122,6 +127,7 @@ const getList = async (
   const res = await _categoryContext.findAndCountAll(option).catch((err) => {
     logger.error(err);
   });
+  console.log("res: ", res);
 
   if (res) {
     return {

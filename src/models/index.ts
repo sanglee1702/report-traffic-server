@@ -125,5 +125,9 @@ dbContext.AccountsContext.hasOne(dbContext.UsersContext, {
   foreignKey: "accountId",
   onDelete: "CASCADE",
 });
+dbContext.CategoriesContext.belongsTo(dbContext.GroupCategoriesContext, {
+  foreignKey: "groupId",
+  onDelete: "SET NULL",
+});
 
 export default dbContext;

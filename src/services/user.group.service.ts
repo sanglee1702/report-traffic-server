@@ -1,10 +1,10 @@
-import logger from '../logs/logger';
-import dbContext from '../models';
-import { ObjectStatus } from '../models/common/models.enum';
+import logger from "../logs/logger";
+import dbContext from "../models";
+import { ObjectStatus } from "../models/common/models.enum";
 import {
   ICreateGroupUserModels,
   IGroupUserModels,
-} from '../models/user.groups.models';
+} from "../models/user.groups.models";
 
 export interface IGroupUserRes {
   id: number;
@@ -25,7 +25,7 @@ export interface IGroupUserService {
 const _groupUserContext = dbContext.GroupUserContext;
 
 const create = async (
-  models: ICreateGroupUserModels,
+  models: ICreateGroupUserModels
 ): Promise<IGroupUserModels> => {
   const res = await _groupUserContext
     .create({
@@ -81,14 +81,14 @@ const getByUserId = async (userId: number): Promise<IGroupUserModels[]> => {
 
 const update = async (
   id: number,
-  models: ICreateGroupUserModels,
+  models: ICreateGroupUserModels
 ): Promise<boolean> => {
   const res = await _groupUserContext
     .update(
       { ...models },
       {
         where: { id },
-      },
+      }
     )
     .catch((err) => {
       logger.error(err);
@@ -107,7 +107,7 @@ const disabled = async (id: number, userId: number): Promise<boolean> => {
       { objectStatus: ObjectStatus.DeActive, updatedBy: userId.toString() },
       {
         where: { id },
-      },
+      }
     )
     .catch((err) => {
       logger.error(err);
